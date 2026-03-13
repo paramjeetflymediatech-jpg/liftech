@@ -1,19 +1,19 @@
-import Header from "../components/Header";
-import Hero from "../components/Hero";
-import Products from "../components/Products";
+import BannerCarousel from "../components/BannerCarousel";
+import FeatureGrid from "../components/FeatureGrid";
+import Testimonials from "../components/Testimonials";
 import About from "../components/About";
 import Contact from "../components/Contact";
-import Footer from "../components/Footer";
+import CategoryPreview from "../components/CategoryPreview";
 
 export default function Page() {
   return (
     <>
-      <Header />
-      <Hero />
-      <Products />
+      <BannerCarousel />
+      <FeatureGrid />
+      <CategoryPreview />
       <About />
+      <Testimonials />
       <Contact />
-      <Footer />
     </>
   );
 }

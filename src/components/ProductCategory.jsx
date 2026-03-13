@@ -1,31 +1,24 @@
-export default function ProductCategory({ title, products }) {
-  return (
-    <section className="py-16 border-b">
+import ProductCard from "./ProductCard";
 
-      <h2 className="text-3xl font-bold mb-8">
-        {title}
-      </h2>
+export default function ProductCategory({ title, products = [], slug }) {
+    return (
+        <section className="py-16 border-b dark:border-gray-800 transition-colors">
 
-      <div className="grid md:grid-cols-4 gap-6">
+            <h2 className="text-3xl font-black mb-8 text-gray-900 dark:text-white tracking-tight">
+                {title}
+            </h2>
 
-        {products.map((product, index) => (
-          <div
-            key={index}
-            className="border rounded-xl p-4 hover:shadow-lg transition"
-          >
-            <div className="h-40 bg-gray-100 mb-4"></div>
+            <div className="grid md:grid-cols-4 gap-6">
 
-            <h3 className="font-semibold text-lg">
-              {product}
-            </h3>
+                {products.map((product) => (
+                    <ProductCard
+                        key={product.slug}
+                        product={product}
+                        categorySlug={slug}
+                    />
+                ))}
 
-            <button className="mt-3 text-blue-700 font-medium">
-              View Details →
-            </button>
-          </div>
-        ))}
-
-      </div>
-    </section>
-  );
+            </div>
+        </section>
+    );
 }

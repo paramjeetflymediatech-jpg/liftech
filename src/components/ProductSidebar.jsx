@@ -1,21 +1,33 @@
-export default function ProductSidebar({ categories }) {
+export default function ProductSidebar({ categories, active, onSelect }) {
   return (
-    <div className="w-64 border-r pr-6">
+    <aside className="w-64 sticky top-24 self-start">
 
-      <h3 className="font-bold mb-4">
+      <h3 className="text-xl font-bold mb-6 text-gray-900 dark:text-gray-100">
         Product Categories
       </h3>
 
-      <ul className="space-y-2">
-        {categories.map((cat, i) => (
-          <li key={i}>
-            <a href="#" className="text-blue-700 hover:underline">
-              {cat.title}
-            </a>
-          </li>
-        ))}
+      <ul className="space-y-4">
+
+        {categories.map((cat, i) => {
+          const selected = active === cat.slug;
+          return (
+            <li key={i}>
+              <button
+                onClick={() => onSelect && onSelect(cat.slug)}
+                className={`text-left w-full transition-colors ${
+                  selected
+                    ? "text-primary font-bold"
+                    : "text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary"
+                }`}
+              >
+                {cat.title}
+              </button>
+            </li>
+          );
+        })}
+
       </ul>
 
-    </div>
+    </aside>
   );
 }
