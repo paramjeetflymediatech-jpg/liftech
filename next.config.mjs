@@ -3,12 +3,11 @@ const nextConfig = {
   /* config options here */
   reactCompiler: true,
   images: {
-    domains: [
-      'via.placeholder.com',
-      'picsum.photos',
-      'source.unsplash.com',
+    remotePatterns: [
+      { protocol: 'https', hostname: 'via.placeholder.com' },
+      { protocol: 'https', hostname: 'picsum.photos' },
+      { protocol: 'https', hostname: 'source.unsplash.com' },
     ],
-    // alternatively use remotePatterns for more control
   },
 };
 
