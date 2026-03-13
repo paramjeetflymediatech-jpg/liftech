@@ -7,7 +7,7 @@ export default function Footer() {
             <img
               src="/assets/images/logo.png"
               alt="Liftech Logo"
-              className="h-30 w-auto"
+              className="h-20 w-auto"
             />
             <span className="ml-3 font-heading font-bold text-2xl tracking-tight text-white uppercase">
               LIFTECH

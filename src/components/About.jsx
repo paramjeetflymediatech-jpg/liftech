@@ -1,26 +1,28 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import { useTranslation } from 'react-i18next';
 import { productCategories } from "../data/productCategories";
 
 const FALLBACK = "/assets/images/logo.png";
 
 export default function About() {
+  const { t } = useTranslation();
   const samples = productCategories.flatMap((c) => 
     c.products.map(p => ({ ...p, categorySlug: c.slug }))
   ).slice(0, 6);
 
   return (
-    <section id="about" className="bg-white dark:bg-gray-950 py-24 transition-colors overflow-hidden">
+    <section id="about" className="bg-white dark:bg-gray-950 py-12 sm:py-24 transition-colors overflow-hidden">
       {/* Hero Content / History */}
-      <div className="max-w-5xl mx-auto px-6 mb-24 relative animate-fadeInUp">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 mb-12 sm:mb-24 relative animate-fadeInUp">
         <div className="absolute -top-10 -left-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl opacity-50" />
         <h2 className="text-sm font-heading font-black uppercase tracking-[0.3em] text-primary mb-6 text-center">
-          Our Heritage
+          {t('about.heritage')}
         </h2>
-        <h3 className="text-5xl md:text-7xl font-heading font-bold text-gray-900 dark:text-white text-center leading-[1.1] mb-12">
-          Engineering Trust <br />
-          <span className="text-gray-300">Since 1983.</span>
+        <h3 className="text-3xl sm:text-5xl md:text-7xl font-heading font-bold text-gray-900 dark:text-white text-center leading-[1.1] mb-8 sm:mb-12">
+          {t('about.title')} <br />
+          <span className="text-gray-300">{t('about.since')}</span>
         </h3>
         <div className="grid md:grid-cols-2 gap-12 text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
           <p>
@@ -46,21 +48,21 @@ export default function About() {
           </div>
           <blockquote className="text-center">
             <p className="text-2xl md:text-3xl font-body italic text-gray-900 dark:text-white leading-relaxed max-w-4xl mx-auto">
-              "Time has changed, Things have changed, We evolved, world around us has evolved too.. But our determination and passion towards work is still the same"
+              "{t('about.founder.quote')}"
             </p>
             <footer className="mt-6">
-              <span className="text-primary font-heading font-black uppercase tracking-[0.2em] text-sm">Inderpal Singh</span>
-              <span className="text-gray-400 text-xs ml-3 border-l border-gray-300 dark:border-gray-700 pl-3">Founder, Liftech Industries</span>
+              <span className="text-primary font-heading font-black uppercase tracking-[0.2em] text-sm">{t('about.founder.name')}</span>
+              <span className="text-gray-400 text-xs ml-3 border-l border-gray-300 dark:border-gray-700 pl-3">{t('about.founder.title')}</span>
             </footer>
           </blockquote>
         </div>
       </div>
 
       {/* Strategic Value Blocks */}
-      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8 mb-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-24">
         {[
           {
-            title: "Our Mission",
+            title: t('about.mission'),
             text: "Being a customer-oriented firm, we aim at manufacturing high quality spare parts with prompt delivery at a competitive price. We are committed to international market competitiveness through continual improvement.",
             icon: (
               <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -69,7 +71,7 @@ export default function About() {
             )
           },
           {
-            title: "Reliable High-Quality",
+            title: t('about.quality'),
             text: "Our products are manufactured in India with modern production technology. The production and quality at our plants is controlled in accordance with the ISO 9001 standard. This makes it possible for us to ensure the high quality of our products.",
             icon: (
               <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -78,7 +80,7 @@ export default function About() {
             )
           },
           {
-            title: "Extensive Experience",
+            title: t('about.experience'),
             text: "In addition, we have more than 17 years of experience in the manufacturing of our products, which has given us a clear understanding of the features and solutions that users appreciate.",
             icon: (
               <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -100,7 +102,7 @@ export default function About() {
       </div>
 
       {/* Showcase Card Grid */}
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex justify-between items-end mb-12">
           <div>
             <h3 className="text-xs font-heading font-black uppercase tracking-[0.4em] text-primary mb-4">Industrial Showcase</h3>

@@ -2,7 +2,10 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTranslation } from 'react-i18next';
 import SearchOverlay from "./SearchOverlay";
+import LanguageSelector from "./LanguageSelector";
+import LanguageTranslator from "./LanguageTranslator";
 
 export default function Header() {
   const [dark, setDark] = useState(false);
@@ -10,6 +13,7 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const pathname = usePathname();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const stored = localStorage.getItem("theme");
@@ -38,15 +42,17 @@ export default function Header() {
   };
 
   const navItems = [
-    { href: "/products", label: "Products" },
-    { href: "/about", label: "About" },
-    { href: "/contact", label: "Contact" },
-    { href: "/career", label: "Careers" },
+    { href: "/products", label: t("nav.products") },
+    { href: "/about", label: t("nav.about") },
+    { href: "/contact", label: t("nav.contact") },
+    { href: "/career", label: t("nav.careers") },
   ];
 
   const isHome = pathname === "/";
   const showSolid = scrolled || !isHome;
-  const textColor = showSolid ? "text-gray-900 dark:text-white" : "text-white";
+  
+  // High contrast text color logic
+  const textColor = showSolid ? "text-gray-950 dark:text-white" : "text-white";
 
   return (
     <header
@@ -56,15 +62,15 @@ export default function Header() {
           : "bg-white py-5"
       }`}
     >
-      <div className="max-w-7xl mx-auto flex justify-between items-center px-6">
-        <Link href="/" className="flex items-center group">
+      <div className="max-w-7xl mx-auto flex justify-between items-center px-3 sm:px-6">
+        <Link href="/" className="flex items-center group shrink-0">
           <div className="flex items-center">
             <img
               src="/assets/images/logo.png"
               alt="Liftech Logo"
-              className="h-10 w-auto"
+              className="h-8 sm:h-10 w-auto"
             />
-            <span className="ml-3 font-heading font-bold text-2xl tracking-tight text-gray-900">
+            <span className={`ml-2 sm:ml-3 font-heading font-black text-sm sm:text-xl md:text-2xl tracking-tight transition-colors whitespace-nowrap ${textColor}`}>
               LIFTECH
             </span>
           </div>
@@ -79,7 +85,7 @@ export default function Header() {
                 key={item.href}
                 href={item.href}
                 className={`relative font-heading font-medium text-sm transition-all duration-300 hover:text-primary ${
-                  isActive ? "text-primary" : "text-gray-700"
+                  isActive ? "text-primary" : textColor
                 } group`}
               >
                 {item.label}
@@ -99,15 +105,34 @@ export default function Header() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </button>
+          
+          <div className="max-w-[150px] overflow-hidden shrink-0">
+            <LanguageTranslator uniqueId="translator-desktop" />
+          </div>
         </nav>
 
-        {/* Mobile Toggle */}
-        <button
-          onClick={() => setOpen(!open)}
-          className={`md:hidden p-2 rounded-xl transition-colors ${textColor}`}
-          aria-label="Toggle menu"
-        >
-          <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        {/* Mobile Actions */}
+        <div className="flex md:hidden items-center gap-2 sm:gap-4 shrink-0">
+          {/* Mobile Language Button */}
+          <button
+            onClick={() => {
+              const el = document.querySelector('.goog-te-menu-frame');
+              if (el) el.style.display = 'block';
+              else alert('Please wait for translation to load, or use desktop view for best experience');
+            }}
+            className="relative z-10 shrink-0 flex items-center gap-1 px-2 py-1.5 rounded-full border border-gray-200 bg-white"
+            aria-label="Select language"
+          >
+            <svg className="w-4 h-4 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+            </svg>
+          </button>
+          <button
+            onClick={() => setOpen(!open)}
+            className={`p-1.5 sm:p-2 rounded-xl transition-colors ${textColor}`}
+            aria-label="Toggle menu"
+          >
+          <svg className="h-6 w-6 sm:h-7 sm:w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -116,6 +141,7 @@ export default function Header() {
             />
           </svg>
         </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
@@ -142,9 +168,6 @@ export default function Header() {
             }}
             className="mt-4 flex items-center gap-3 px-4 py-3 bg-gray-50 rounded-2xl text-primary font-heading font-bold"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
             Search Catalog
           </button>
         </div>

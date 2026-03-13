@@ -2,12 +2,14 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useTranslation } from 'react-i18next';
 import { productCategories } from "../data/productCategories";
 
 export default function SearchOverlay({ isOpen, onClose }) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const inputRef = useRef(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (isOpen && inputRef.current) {
@@ -87,7 +89,7 @@ export default function SearchOverlay({ isOpen, onClose }) {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search products, categories, or parts..."
+            placeholder={t("search.placeholder")}
             className="w-full text-3xl md:text-5xl font-heading font-bold text-gray-900 bg-transparent outline-none placeholder:text-gray-200"
           />
           <div className={`absolute bottom-[-4px] left-0 h-1 bg-primary transition-all duration-500 ${query ? 'w-full' : 'w-0'}`} />

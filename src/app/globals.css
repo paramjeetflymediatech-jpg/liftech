@@ -120,14 +120,44 @@
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground font-body;
-  }
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-heading font-bold;
-  }
   html {
     @apply font-sans;
+    overflow-x: hidden !important;
+    scroll-behavior: smooth;
+    width: 100% !important;
+    position: relative;
+    top: 0 !important;
+  }
+  body {
+    @apply bg-background text-foreground font-body;
+    overflow-x: hidden !important;
+    width: 100% !important;
+    position: relative;
+    top: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  /* Extreme Google Translate Overrides */
+  .goog-te-banner-frame,
+  .goog-te-banner-frame.skiptranslate,
+  iframe.goog-te-banner-frame,
+  .goog-te-balloon-frame,
+  #goog-gt-tt,
+  .goog-tooltip,
+  .goog-tooltip:hover {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    width: 0 !important;
+    pointer-events: none !important;
+  }
+
+  /* Prevent Google from shifting the body down */
+  body, html { 
+    top: 0px !important; 
+    margin-top: 0px !important;
+    padding-top: 0px !important;
   }
 }
 
@@ -140,6 +170,9 @@
   }
   .animate-reveal {
     animation: reveal 1s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+  }
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full;
   }
 }
 

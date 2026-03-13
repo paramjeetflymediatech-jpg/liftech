@@ -66,9 +66,8 @@ export default function ProductsPage() {
     );
 
     return (
-        <div className="max-w-7xl mx-auto px-6 py-20 transition-colors">
-
-            <h1 id="products" className="text-5xl md:text-6xl font-heading font-black mb-16 text-gray-900 leading-tight tracking-tighter">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20 transition-colors">
+            <h1 id="products" className="text-4xl sm:text-5xl md:text-6xl font-heading font-black mb-8 sm:mb-16 text-gray-900 leading-tight tracking-tighter text-center md:text-left">
                 Explore Our <br/><span className="text-primary italic">Industrial</span> Portfolio
             </h1>
 
@@ -108,14 +107,14 @@ export default function ProductsPage() {
                         )}
                     </nav>
 
-                    <div className="mb-12 flex flex-col md:flex-row md:items-center gap-6 animate-fadeInUp">
+                    <div className="mb-6 sm:mb-12 flex flex-col md:flex-row md:items-center gap-6 animate-fadeInUp">
                         <div className="relative flex-1 group">
                             <input
                                 type="text"
                                 placeholder="Search the catalog..."
                                 value={searchTerm}
                                 onChange={handleSearchChange}
-                                className="w-full border-b-2 border-gray-100 bg-transparent px-0 py-4 text-gray-900 text-xl font-heading font-medium focus:border-primary outline-none transition-all placeholder:text-gray-300"
+                                className="w-full border-b-2 border-gray-100 bg-transparent px-0 py-3 sm:py-4 text-gray-900 text-lg sm:text-xl font-heading font-medium focus:border-primary outline-none transition-all placeholder:text-gray-300"
                             />
                             <div className="absolute right-0 top-1/2 -translate-y-1/2 text-gray-300 group-hover:text-primary transition-colors">
                                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -136,12 +135,12 @@ export default function ProductsPage() {
                     {!activeCategory && !searchTerm ? (
                         /* Default Paginated Category Grid */
                         <>
-                            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
                                 {paginatedCategories.map((cat) => (
                                     <button
                                         key={cat.slug}
                                         onClick={() => handleCategorySelect(cat.slug)}
-                                        className="group relative h-80 rounded-[2.5rem] overflow-hidden border border-gray-100 shadow-xl hover:shadow-2xl transition-all duration-500 text-left bg-white"
+                                        className="group relative h-72 sm:h-80 rounded-3xl sm:rounded-[2.5rem] overflow-hidden border border-gray-100 shadow-lg hover:shadow-2xl transition-all duration-500 text-left bg-white"
                                     >
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10" />
                                         {cat.products[0]?.image && (
@@ -151,14 +150,14 @@ export default function ProductsPage() {
                                                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                             />
                                         )}
-                                        <div className="absolute bottom-0 left-0 p-8 z-20 w-full">
-                                            <span className="text-[10px] font-heading font-bold uppercase tracking-widest text-primary bg-white/10 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 mb-3 inline-block transition-colors group-hover:bg-primary group-hover:text-white">
+                                        <div className="absolute bottom-0 left-0 p-6 sm:p-8 z-20 w-full">
+                                            <span className="text-[10px] font-heading font-bold uppercase tracking-widest text-primary bg-white/10 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 mb-2 sm:mb-3 inline-block transition-colors group-hover:bg-primary group-hover:text-white">
                                                 {cat.products.length} Products
                                             </span>
-                                            <h3 className="text-2xl font-heading font-bold text-white leading-tight">
+                                            <h3 className="text-xl sm:text-2xl font-heading font-bold text-white leading-tight">
                                                 {cat.title}
                                             </h3>
-                                            <div className="mt-4 flex items-center text-white/60 text-xs font-heading font-bold uppercase tracking-widest group-hover:text-white transition-colors">
+                                            <div className="mt-2 sm:mt-4 flex items-center text-white/60 text-[10px] sm:text-xs font-heading font-bold uppercase tracking-widest group-hover:text-white transition-colors">
                                                 Explore Category
                                                 <svg className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />

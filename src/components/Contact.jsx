@@ -2,16 +2,16 @@
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-32 bg-white dark:bg-gray-950 relative overflow-hidden transition-colors">
+    <section id="contact" className="py-12 sm:py-32 bg-white dark:bg-gray-950 relative overflow-hidden transition-colors">
       {/* Abstract Industrial Background */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-gray-50 dark:bg-gray-900/50 -skew-x-12 translate-x-1/4 pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="max-w-3xl mb-20 animate-fadeInUp">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+        <div className="max-w-3xl mb-12 sm:mb-20 animate-fadeInUp">
           <h2 className="text-sm font-heading font-black uppercase tracking-[0.4em] text-primary mb-6">
             Contact Us
           </h2>
-          <h3 className="text-5xl md:text-7xl font-heading font-bold text-gray-900 dark:text-white leading-[1.1] mb-8">
+          <h3 className="text-3xl sm:text-5xl md:text-7xl font-heading font-bold text-gray-900 dark:text-white leading-[1.1] mb-8">
             Let's Build the <br />
             <span className="text-gray-400">Future Together.</span>
           </h3>
@@ -118,11 +118,12 @@ export default function Contact() {
         </div>
 
         {/* Map Section */}
-        <div className="mt-32 rounded-[3.5rem] overflow-hidden border border-gray-100 dark:border-gray-800 shadow-2xl grayscale hover:grayscale-0 transition-all duration-1000 animate-fadeInUp" style={{ animationDelay: "600ms" }}>
+        <div className="mt-16 sm:mt-32 rounded-3xl sm:rounded-[3.5rem] overflow-hidden border border-gray-100 dark:border-gray-800 shadow-2xl grayscale hover:grayscale-0 transition-all duration-1000 animate-fadeInUp" style={{ animationDelay: "600ms" }}>
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3562.237745825911!2d75.89092791500104!3d30.912670781497565!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3910137e9c5f4ab3%3A0x1234abcd5678efgh!2sLudhia na%20-%20141114!5e0!3m2!1sen!2sin!4v0000000000000"
             width="100%"
-            height="500"
+            height="400"
+            className="sm:h-[500px]"
             style={{ border: 0 }}
             allowFullScreen=""
             loading="lazy"

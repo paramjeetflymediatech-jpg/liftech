@@ -12,7 +12,7 @@ export default function ProductSidebar({ categories, active, onSelect }) {
   );
 
   return (
-    <aside className="w-full lg:w-64 lg:sticky lg:top-24 self-start">
+    <aside className="w-full lg:w-64 lg:sticky lg:top-24 self-start bg-gray-50/50 lg:bg-transparent -mx-4 px-4 sm:mx-0 sm:px-0 py-6 lg:py-0">
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-xs font-heading font-black uppercase tracking-[0.3em] text-gray-400">
           Catalog Index

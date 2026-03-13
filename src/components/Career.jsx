@@ -2,16 +2,16 @@
 
 export default function Career() {
   return (
-    <section id="career" className="py-32 bg-white dark:bg-gray-950 transition-colors relative overflow-hidden">
+    <section id="career" className="py-12 sm:py-32 bg-white dark:bg-gray-950 transition-colors relative overflow-hidden">
       {/* Decorative Elements */}
       <div className="absolute top-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2" />
       
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="text-center mb-24 animate-fadeInUp">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+        <div className="text-center mb-12 sm:mb-24 animate-fadeInUp">
           <h2 className="text-sm font-heading font-black uppercase tracking-[0.4em] text-primary mb-6">
             Careers
           </h2>
-          <h3 className="text-5xl md:text-7xl font-heading font-bold text-gray-900 dark:text-white leading-tight mb-8">
+          <h3 className="text-3xl sm:text-5xl md:text-7xl font-heading font-bold text-gray-900 dark:text-white leading-tight mb-8">
             Join the <br />
             <span className="text-gray-400">Engineering Elite.</span>
           </h3>
@@ -20,7 +20,7 @@ export default function Career() {
           </p>
         </div>
 
-        <div className="max-w-5xl mx-auto bg-gray-50 dark:bg-gray-900 rounded-[3rem] p-8 md:p-20 shadow-2xl border border-gray-100 dark:border-gray-800 animate-fadeInUp" style={{ animationDelay: "200ms" }}>
+        <div className="max-w-5xl mx-auto bg-gray-50 dark:bg-gray-900 rounded-[2rem] sm:rounded-[3rem] p-6 sm:p-10 md:p-20 shadow-2xl border border-gray-100 dark:border-gray-800 animate-fadeInUp" style={{ animationDelay: "200ms" }}>
           <div className="flex items-center gap-4 mb-16 border-l-4 border-primary pl-6">
             <h4 className="text-3xl font-heading font-bold dark:text-white">Apply Now</h4>
             <span className="text-xs font-heading font-bold uppercase tracking-widest text-gray-400">Global Opportunities</span>

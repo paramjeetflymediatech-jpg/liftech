@@ -1,6 +1,8 @@
 "use client";
+import { useTranslation } from 'react-i18next';
 
 export default function Manufacturing() {
+  const { t } = useTranslation();
   const features = [
     {
       title: "Advanced Machine Shop",
@@ -41,38 +43,38 @@ export default function Manufacturing() {
   ];
 
   return (
-    <section id="manufacturing" className="py-32 bg-gray-50 dark:bg-gray-900 transition-colors relative overflow-hidden">
+    <section id="manufacturing" className="py-12 sm:py-32 bg-gray-50 dark:bg-gray-900 transition-colors relative overflow-hidden">
       {/* Background patterns */}
       <div className="absolute top-0 right-0 w-1/3 h-full bg-primary/5 -skew-x-12 translate-x-1/2 pointer-events-none" />
       
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-20 items-center mb-32">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 sm:gap-20 items-center mb-16 sm:mb-32">
           <div className="animate-fadeInUp">
             <h2 className="text-sm font-heading font-black uppercase tracking-[0.4em] text-primary mb-6">
-              Production Capabilities
+              {t('manufacturing.title')}
             </h2>
-            <h3 className="text-5xl md:text-7xl font-heading font-bold text-gray-900 dark:text-white leading-[1.1] mb-8">
-              Where Precision <br />
-              <span className="text-gray-400">Meets Scale.</span>
+            <h3 className="text-3xl sm:text-5xl md:text-7xl font-heading font-bold text-gray-900 dark:text-white leading-[1.1] mb-8">
+              {t('manufacturing.subtitle')} <br />
+              <span className="text-gray-400">{t('manufacturing.subtitle2')}</span>
             </h3>
-            <p className="text-xl text-gray-600 dark:text-gray-400 font-body leading-relaxed max-w-xl">
-              Our state-of-the-art manufacturing facility in Ludhiana serves as the engineering heart of Liftech, combining decades of craftsmanship with modern industrial automation.
+            <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 font-body leading-relaxed max-w-xl">
+              {t('manufacturing.description')}
             </p>
             
-            <div className="mt-12 flex gap-12 border-t border-gray-200 dark:border-gray-800 pt-12">
+            <div className="mt-8 sm:mt-12 flex gap-8 sm:gap-12 border-t border-gray-200 dark:border-gray-800 pt-8 sm:pt-12">
               <div>
-                <p className="text-4xl font-heading font-bold text-gray-900 dark:text-white">ISO 9001</p>
-                <p className="text-xs font-heading font-black uppercase tracking-widest text-primary mt-2">Certified Quality</p>
+                <p className="text-3xl sm:text-4xl font-heading font-bold text-gray-900 dark:text-white">{t('manufacturing.certified')}</p>
+                <p className="text-[10px] sm:text-xs font-heading font-black uppercase tracking-widest text-primary mt-2">Certified Quality</p>
               </div>
               <div>
-                <p className="text-4xl font-heading font-bold text-gray-900 dark:text-white">25+ Yrs</p>
-                <p className="text-xs font-heading font-black uppercase tracking-widest text-primary mt-2">Expertise</p>
+                <p className="text-3xl sm:text-4xl font-heading font-bold text-gray-900 dark:text-white">{t('manufacturing.expertise')}</p>
+                <p className="text-[10px] sm:text-xs font-heading font-black uppercase tracking-widest text-primary mt-2">Expertise</p>
               </div>
             </div>
           </div>
           
           <div className="relative animate-slideInRight">
-            <div className="aspect-[4/5] rounded-[4rem] overflow-hidden shadow-2xl relative group">
+            <div className="aspect-[4/5] rounded-3xl sm:rounded-[4rem] overflow-hidden shadow-2xl relative group">
               <img 
                 src="/images/clevispin.jpg" 
                 alt="Liftech Manufacturing Facility" 
