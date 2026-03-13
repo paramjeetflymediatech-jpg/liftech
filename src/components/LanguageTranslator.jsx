@@ -5,39 +5,37 @@ import { Languages } from "lucide-react";
 export default function LanguageTranslator({ uniqueId = "google_translate_element" }) {
   const [mounted, setMounted] = useState(false);
   const [ready, setReady] = useState(false);
-  
-  // Use refs to avoid SSR issues
   const translatorInitialized = useRef(false);
-  const scriptLoaded = useRef(false);
-  const initializedRef = useRef(false);
 
   useEffect(() => {
     setMounted(true);
 
-    // Hide Google Translate banner
-    const hideBanner = () => {
-      if (typeof window === 'undefined') return;
-      const frames = document.querySelectorAll('.goog-te-banner-frame, .skiptranslate');
-      frames.forEach(f => {
-        if (f) f.style.cssText = 'display: none !important; height: 0 !important;';
-      });
-      if (document.body) document.body.style.marginTop = '0';
+    const checkGoogleTranslate = () => {
+      if (window.google && window.google.translate && window.google.translate.TranslateElement) {
+        initTranslator();
+      } else if (!document.getElementById('google-translate-script')) {
+        loadScript();
+      }
     };
 
-    // Initialize translator
-    const init = () => {
-      if (translatorInitialized.current) {
-        setReady(true);
-        return;
-      }
+    const loadScript = () => {
+      const script = document.createElement('script');
+      script.id = 'google-translate-script';
+      script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+      script.async = true;
+      document.body.appendChild(script);
 
-      if (typeof window === 'undefined' || !window.google || !window.google.translate) {
-        return;
-      }
+      window.googleTranslateElementInit = () => {
+        initTranslator();
+      };
+    };
 
-      try {
-        const container = document.getElementById(uniqueId);
-        if (container && !container.querySelector('.goog-te-gadget')) {
+    const initTranslator = () => {
+      if (translatorInitialized.current) return;
+      
+      const element = document.getElementById(uniqueId);
+      if (element) {
+        try {
           new window.google.translate.TranslateElement(
             {
               pageLanguage: "en",
@@ -49,80 +47,81 @@ export default function LanguageTranslator({ uniqueId = "google_translate_elemen
           );
           translatorInitialized.current = true;
           setReady(true);
+        } catch (e) {
+          console.error("Translation init error:", e);
         }
-      } catch (e) {
-        console.error('Translator init error:', e);
       }
     };
 
-    // Load Google Translate script
-    const loadScript = () => {
-      if (scriptLoaded.current) {
-        setTimeout(init, 1000);
-        return;
+    // Delay a bit to ensure DOM is ready
+    const timer = setTimeout(checkGoogleTranslate, 500);
+    
+    // Periodically check if banner appears and hide it
+    const interval = setInterval(() => {
+      const banner = document.querySelector('.goog-te-banner-frame');
+      if (banner) {
+        banner.style.display = 'none';
+        document.body.style.top = '0';
       }
+    }, 500);
 
-      if (typeof window === 'undefined') return;
-
-      window.googleTranslateElementInit = () => {
-        scriptLoaded.current = true;
-        setTimeout(init, 500);
-      };
-      
-      const script = document.createElement('script');
-      script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-      script.async = true;
-      script.onerror = () => console.error('Failed to load Google Translate');
-      document.body.appendChild(script);
+    return () => {
+      clearTimeout(timer);
+      clearInterval(interval);
     };
-
-    if (initializedRef.current) return;
-    initializedRef.current = true;
-
-    if (typeof window !== 'undefined') {
-      if (!window.google || !window.google.translate) {
-        loadScript();
-      } else {
-        init();
-      }
-
-      // Interval to hide banner
-      const interval = setInterval(hideBanner, 500);
-      setTimeout(() => clearInterval(interval), 10000);
-
-      return () => clearInterval(interval);
-    }
   }, [uniqueId]);
 
-  // Use the same structure on both server and client to prevent hydration mismatch
-  // Only the content differs: "Loading..." on server, actual widget on client
+  if (!mounted) {
+    return (
+      <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-gray-200 bg-white shadow-sm">
+        <Languages className="w-4 h-4 text-gray-400" />
+        <span className="text-[13px] font-semibold text-gray-400 uppercase">Lang</span>
+      </div>
+    );
+  }
+
   return (
-    <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-gray-200 bg-white shadow-sm hover:shadow-md transition-all duration-300 group cursor-pointer">
-      <Languages className="w-4 h-4 text-gray-500 group-hover:text-primary" />
-      {!ready ? (
-        <span className="text-[13px] font-semibold text-gray-400">Loading...</span>
-      ) : (
-        <div id={uniqueId} className="translate-widget" />
-      )}
+    <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-gray-200 bg-white shadow-sm hover:shadow-md transition-all duration-300 group cursor-pointer overflow-hidden max-w-full">
+      <Languages className="w-4 h-4 text-gray-500 group-hover:text-primary shrink-0" />
+      <div id={uniqueId} className="translate-widget" />
       
+      {!ready && !translatorInitialized.current && (
+        <span className="text-[12px] font-bold text-gray-400 animate-pulse uppercase tracking-tight">Loading...</span>
+      )}
+
       <style jsx global>{`
-        .goog-te-banner-frame { display: none !important; height: 0 !important; }
+        .goog-te-banner-frame { display: none !important; }
+        body { top: 0 !important; }
         .goog-te-gadget-simple {
-          background: transparent !important;
+          background-color: transparent !important;
           border: none !important;
-          padding: 4px 8px !important;
-          font-size: 13px !important;
-          font-weight: 600 !important;
-          color: #374151 !important;
-          cursor: pointer !important;
+          padding: 0 !important;
           display: flex !important;
           align-items: center !important;
-          gap: 6px !important;
+          font-family: inherit !important;
+        }
+        .goog-te-gadget-icon { display: none !important; }
+        .goog-te-menu-value {
+          margin: 0 !important;
+          color: #374151 !important;
+          font-size: 13px !important;
+          font-weight: 600 !important;
+          display: flex !important;
+          align-items: center !important;
+          text-transform: uppercase !important;
+        }
+        .goog-te-menu-value span { color: #374151 !important; }
+        .goog-te-menu-value img { display: none !important; }
+        .goog-te-gadget-simple .goog-te-menu-value:after {
+          content: '▼';
+          font-size: 8px;
+          margin-left: 4px;
+          color: #9ca3af;
         }
         .goog-te-menu-frame {
-          position: fixed !important;
-          z-index: 99999 !important;
-          box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important;
+          box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+          border-radius: 0.5rem !important;
+          border: 1px solid #e5e7eb !important;
         }
       `}</style>
     </div>
