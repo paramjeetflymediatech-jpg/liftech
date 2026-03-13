@@ -28,12 +28,10 @@ const slides = [
 ];
 
 function Slide({ slide, visible }) {
+  if (!visible) return null; // Only render the visible slide to prevent any interference
+  
   return (
-    <div
-      className={`absolute inset-0 transition-opacity duration-1000 ${
-        visible ? "opacity-100 z-10" : "opacity-0 z-0"
-      }`}
-    >
+    <div className="absolute inset-0 z-10 animate-in fade-in duration-700">
       <Image
         src={slide.image}
         alt={slide.title}
@@ -42,21 +40,24 @@ function Slide({ slide, visible }) {
         className="object-cover"
       />
 
-      <div className="absolute inset-0 bg-black/40 flex flex-col justify-end items-start p-8">
-        <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-3 max-w-2xl">
-          {slide.title}
-        </h2>
-
-        <p className="text-lg md:text-xl text-white mb-6 max-w-xl">
-          {slide.subtitle}
-        </p>
-
-        <Link
-          href={slide.href}
-          className="bg-yellow-400 hover:bg-yellow-500 text-black px-8 py-3 rounded-full font-semibold transition transform hover:scale-105"
-        >
-          {slide.cta}
-        </Link>
+      <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent flex flex-col justify-center items-start p-12 md:p-24">
+        <div className="max-w-3xl">
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-white mb-4 leading-tight">
+            {slide.title}
+          </h2>
+  
+          <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-xl font-body">
+            {slide.subtitle}
+          </p>
+  
+          <Link
+            href={slide.href}
+            className="group relative bg-primary hover:bg-baldan-red/90 text-white px-10 py-4 rounded-full font-heading font-bold transition-all duration-300 shadow-xl inline-flex items-center overflow-hidden"
+          >
+            <span className="relative z-10">{slide.cta}</span>
+            <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+          </Link>
+        </div>
       </div>
     </div>
   );
@@ -77,35 +78,41 @@ export default function BannerCarousel() {
   const next = () => setIndex((i) => (i + 1) % slides.length);
 
   return (
-    <div className="relative h-[500px] md:h-[600px] overflow-hidden">
+    <div className="relative h-[600px] md:h-[800px] overflow-hidden">
 
       {slides.map((slide, i) => (
         <Slide key={i} slide={slide} visible={i === index} />
       ))}
 
       {/* arrows */}
-      <button
-        onClick={prev}
-        className="absolute left-5 top-1/2 -translate-y-1/2 bg-black/40 text-white p-3 rounded-full hover:bg-black/60"
-      >
-        ‹
-      </button>
+      <div className="hidden md:block">
+        <button
+          onClick={prev}
+          className="absolute left-8 top-1/2 -translate-y-1/2 z-20 bg-white/10 backdrop-blur-md text-white p-4 rounded-full hover:bg-primary hover:scale-110 transition-all duration-300 border border-white/20"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
 
-      <button
-        onClick={next}
-        className="absolute right-5 top-1/2 -translate-y-1/2 bg-black/40 text-white p-3 rounded-full hover:bg-black/60"
-      >
-        ›
-      </button>
+        <button
+          onClick={next}
+          className="absolute right-8 top-1/2 -translate-y-1/2 z-20 bg-white/10 backdrop-blur-md text-white p-4 rounded-full hover:bg-primary hover:scale-110 transition-all duration-300 border border-white/20"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
 
       {/* dots */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3">
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex gap-4">
         {slides.map((_, i) => (
           <button
             key={i}
             onClick={() => setIndex(i)}
-            className={`h-3 w-3 rounded-full ${
-              index === i ? "bg-white" : "bg-gray-400"
+            className={`h-1.5 transition-all duration-500 rounded-full ${
+              index === i ? "w-10 bg-primary" : "w-4 bg-white/50 hover:bg-white"
             }`}
           />
         ))}

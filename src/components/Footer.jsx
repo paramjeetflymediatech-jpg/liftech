@@ -1,34 +1,66 @@
 export default function Footer() {
   return (
-    <footer className="bg-primary-dark text-gray-900 dark:bg-black dark:text-gray-400 py-16 transition-colors border-t dark:border-gray-800">
-      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-6">
-        <div className="text-center md:text-left">
-          <h4 className="font-bold mb-4 text-gray-950 dark:text-white uppercase tracking-wider text-sm">Liftech Exports</h4>
-          <p className="text-gray-900 dark:text-gray-400">Harbanspura near Bijja Chowk</p>
-          <p className="text-gray-900 dark:text-gray-400">Tehsil Samrala, GT Road</p>
-          <p className="text-gray-900 dark:text-gray-400">Ludhiana‑141114, Punjab, India</p>
+    <footer className="bg-[#111] text-gray-400 py-24 transition-colors">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="flex flex-col gap-6">
+          <div className="flex items-center">
+            <img
+              src="/assets/images/logo.png"
+              alt="Liftech Logo"
+              className="h-30 w-auto"
+            />
+            <span className="ml-3 font-heading font-bold text-2xl tracking-tight text-white uppercase">
+              LIFTECH
+            </span>
+          </div>
+          <p className="text-gray-500 font-body leading-relaxed">
+            Pioneering excellence in agricultural implement parts manufacturing and exports since 1998.
+          </p>
         </div>
 
-        <div className="text-center">
-          <h4 className="font-bold mb-4 text-gray-950 dark:text-white uppercase tracking-wider text-sm">Contact</h4>
-          <p className="text-gray-900 dark:text-gray-400">📞 +91 (1628) 264574</p>
-          <p className="text-gray-900 dark:text-gray-400">✉️ <a href="mailto:Info@liftechexports.com" className="underline hover:text-white transition-colors">Info@liftechexports.com</a></p>
+        <div>
+          <h4 className="font-heading font-bold mb-8 text-white uppercase tracking-widest text-sm border-l-4 border-primary pl-4">Contact Info</h4>
+          <div className="flex flex-col gap-4 font-body">
+            <p className="flex items-start gap-3">
+              <span className="text-primary font-bold">A</span>
+              Harbanspura near Bijja Chowk, Tehsil Samrala, GT Road, Ludhiana‑141114, Punjab, India
+            </p>
+            <p className="flex items-center gap-3">
+              <span className="text-primary font-bold">P</span>
+              +91 (1628) 264574
+            </p>
+            <p className="flex items-center gap-3">
+              <span className="text-primary font-bold">E</span>
+              <a href="mailto:Info@liftechexports.com" className="hover:text-primary transition-colors">Info@liftechexports.com</a>
+            </p>
+          </div>
         </div>
 
-        <div className="text-center md:text-right">
-          <h4 className="font-bold mb-4 text-gray-950 dark:text-white uppercase tracking-wider text-sm">Quick Links</h4>
-          <nav className="flex flex-col gap-2">
-            <a href="/" className="hover:text-white transition-colors">Home</a>
-            <a href="/products" className="hover:text-white transition-colors">Products</a>
-            <a href="/about" className="hover:text-white transition-colors">About</a>
-            <a href="/contact" className="hover:text-white transition-colors">Contact</a>
-            <a href="/career" className="hover:text-white transition-colors">Careers</a>
+        <div>
+          <h4 className="font-heading font-bold mb-8 text-white uppercase tracking-widest text-sm border-l-4 border-primary pl-4">Company</h4>
+          <nav className="flex flex-col gap-4 font-heading font-bold text-sm uppercase tracking-wider">
+            <a href="/" className="hover:text-primary transition-colors">Home</a>
+            <a href="/about" className="hover:text-primary transition-colors">About Us</a>
+            <a href="/career" className="hover:text-primary transition-colors">Careers</a>
+            <a href="/contact" className="hover:text-primary transition-colors">Contact</a>
+          </nav>
+        </div>
+
+        <div>
+          <h4 className="font-heading font-bold mb-8 text-white uppercase tracking-widest text-sm border-l-4 border-primary pl-4">Products</h4>
+          <nav className="flex flex-col gap-4 font-heading font-bold text-sm uppercase tracking-wider">
+            <a href="/products" className="hover:text-primary transition-colors">Catalog</a>
+            <a href="/manufacturing" className="hover:text-primary transition-colors">Quality Control</a>
           </nav>
         </div>
       </div>
 
-      <div className="mt-8 text-center text-sm text-gray-300">
-        © {new Date().getFullYear()} Liftech Exports. All rights reserved.
+      <div className="max-w-7xl mx-auto px-6 mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-xs font-heading font-bold uppercase tracking-widest text-gray-600">
+        <div>© {new Date().getFullYear()} Liftech Exports Industries.</div>
+        <div className="flex gap-8">
+          <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+          <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+        </div>
       </div>
     </footer>
   );

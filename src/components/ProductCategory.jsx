@@ -8,7 +8,7 @@ export default function ProductCategory({ title, products = [], slug }) {
                 {title}
             </h2>
 
-            <div className="grid md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
 
                 {products.map((product) => (
                     <ProductCard

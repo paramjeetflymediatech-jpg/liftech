@@ -12,7 +12,7 @@ export default function Hero() {
       </div>
       <div className="relative max-w-7xl mx-auto grid md:grid-cols-2 gap-10 px-6 items-center">
         <div className="space-y-6">
-          <h2 className="text-5xl font-extrabold leading-tight animate-fade-in-up">
+          <h2 className="text-5xl font-extrabold leading-tight animate-fadeInUp">
             Precision Tractor Linkage Parts
           </h2>
 

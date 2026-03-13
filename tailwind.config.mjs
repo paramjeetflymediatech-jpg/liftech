@@ -10,16 +10,28 @@ export default {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#f59e0b', // Amber 600
-          dark: '#d97706',    // Amber 700
-          light: '#fbbf24',   // Amber 400
+          DEFAULT: '#D81E31', // Baldan Red
+          dark: '#B01828',
+          light: '#E64D5D',
+        },
+        baldan: {
+          red: '#D81E31',
+          prepare: '#A6363E',
+          sow: '#E0643E',
+          protect: '#7C5E92',
+          move: '#3E5B66',
+          restore: '#000000',
         },
         secondary: {
-          DEFAULT: '#0d9488', // Teal 600
-          dark: '#0f766e',
-          light: '#5eead4',
+          DEFAULT: '#3E5B66', // Industrial Teal/Blue
+          dark: '#2C414A',
+          light: '#567D8C',
         },
-        accent: '#fbbf24',    // Amber 400
+        accent: '#D81E31',
+      },
+      fontFamily: {
+        heading: ['var(--font-heading)', 'sans-serif'],
+        body: ['var(--font-body)', 'sans-serif'],
       },
     },
   },
